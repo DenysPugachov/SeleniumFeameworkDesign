@@ -5,6 +5,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 import java.util.List;
@@ -27,6 +29,10 @@ public class StandAloneTest {
             driver.findElement(By.id("userPassword")).sendKeys("testPassword1!");
             driver.findElement(By.id("login")).click();
 
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
+
+            // get all product cards
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".mb-3")));
             List<WebElement> productCardsList = driver.findElements(By.className("mb-3"));
 
             // find specific card
@@ -38,12 +44,25 @@ public class StandAloneTest {
             assert product != null;
             product.findElement(By.cssSelector(".card-body button:last-of-type")).click();
 
+            // confirm that product is added to the Basket
+            // wait until toast element is shown in screen => "Product added to cart"
+            WebElement toastAddToCart = driver.findElement(By.cssSelector("#toast-container"));
+            wait.until(ExpectedConditions.visibilityOf(toastAddToCart));
+
+            // wait until loading icon will be invisible
+            wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".ng-tns-c31-0")));
+
+            // click to Cart (basket) button
+//             WebElement card_basket =
+                     driver.findElement(By.cssSelector("[routerlink*='cart']")).click();
+//             card_basket.click();
+
 
 
         } catch (Exception e) {
             System.err.println("An error occurred: " + e.getMessage());
         } finally {
-            Thread.sleep(3000);
+            Thread.sleep(5000);
             driver.quit();
             System.out.println("Browser closed.");
         }
