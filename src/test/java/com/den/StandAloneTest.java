@@ -20,6 +20,7 @@ public class StandAloneTest {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--headless");
         WebDriver driver = new ChromeDriver();
+        driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.get("https://rahulshettyacademy.com/client");
 
@@ -53,9 +54,8 @@ public class StandAloneTest {
             wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".ng-tns-c31-0")));
 
             // click to Cart (basket) button
-//             WebElement card_basket =
-                     driver.findElement(By.cssSelector("[routerlink*='cart']")).click();
-//             card_basket.click();
+             WebElement card_basket =driver.findElement(By.cssSelector("[routerlink*='cart']"));
+             card_basket.click();
 
 
 
