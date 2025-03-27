@@ -7,6 +7,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 import java.time.Duration;
 import java.util.List;
@@ -38,8 +39,7 @@ public class StandAloneTest {
 
             // find specific card
             String testProductName = "ADIDAS ORIGINAL";
-            WebElement product = productCardsList.stream().filter(prod ->
-                    prod.findElement(By.tagName("b")).getText().equals(testProductName)).findFirst().orElse(null);
+            WebElement product = productCardsList.stream().filter(prod -> prod.findElement(By.tagName("b")).getText().equals(testProductName)).findFirst().orElse(null);
 
             // click "Add to card"
             assert product != null;
@@ -54,10 +54,17 @@ public class StandAloneTest {
             wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".ng-tns-c31-0")));
 
             // click to Cart (basket) button
-             WebElement card_basket =driver.findElement(By.cssSelector("[routerlink*='cart']"));
-             card_basket.click();
+            WebElement card_basket = driver.findElement(By.cssSelector("[routerlink*='cart']"));
+            card_basket.click();
 
+            // check products in the basket
+            List<WebElement> cartProducts = driver.findElements(By.xpath("//img[@class='itemImg']/following-sibling" + "::h3"));
+            boolean isProductInList = cartProducts.stream().anyMatch(cardEl -> cardEl.getText().equalsIgnoreCase(testProductName));
+            Assert.assertTrue(isProductInList, "There is no product in cart list.");
 
+            // click checkout btn
+            WebElement checkoutBnt = driver.findElement(By.xpath("//button[text()='Checkout']"));
+            checkoutBnt.click();
 
         } catch (Exception e) {
             System.err.println("An error occurred: " + e.getMessage());
