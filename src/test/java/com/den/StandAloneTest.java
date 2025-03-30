@@ -5,7 +5,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.interactions.Action;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
@@ -68,10 +71,28 @@ public class StandAloneTest {
             WebElement checkoutBnt = driver.findElement(By.xpath("//button[text()='Checkout']"));
             checkoutBnt.click();
 
+            // Select Poland from dropdown
+            WebElement dropdownSelectCountry =
+                    driver.findElement(By.cssSelector("input[placeholder='Select Country']"));
+            dropdownSelectCountry.sendKeys("Poland");
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".ta-results")));
+            driver.findElement(By.xpath("//button[contains(@class, 'ta-item')][1]")).click();
+
+            // click btn "Place order"
+            driver.findElement(By.cssSelector(".action__submit")).click();
+
+            // Verify final page
+            String confirmTitleText = driver.findElement(By.cssSelector(".hero-primary")).getText();
+            Assert.assertTrue(confirmTitleText.equalsIgnoreCase("Thankyou for the order."),
+                    "Test is fail confirmTitleText is: " + confirmTitleText );
+
+
+
+
         } catch (Exception e) {
             System.err.println("An error occurred: " + e.getMessage());
         } finally {
-            Thread.sleep(5000);
+            Thread.sleep(3000);
             driver.quit();
             System.out.println("Browser closed.");
         }
