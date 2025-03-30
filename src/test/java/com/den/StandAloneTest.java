@@ -46,12 +46,14 @@ public class StandAloneTest {
             product.findElement(By.cssSelector(".card-body button:last-of-type")).click();
 
             // confirm that product is added to the Basket
+
+            // wait until loading icon will be invisible
+            WebElement loadSpinner = driver.findElement(By.cssSelector(".ng-animating"));
+            wait.until(ExpectedConditions.invisibilityOf(loadSpinner));
+
             // wait until toast element is shown in screen => "Product added to cart"
             WebElement toastAddToCart = driver.findElement(By.cssSelector("#toast-container"));
             wait.until(ExpectedConditions.visibilityOf(toastAddToCart));
-
-            // wait until loading icon will be invisible
-            wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".ng-tns-c31-0")));
 
             // click to Cart (basket) button
             WebElement card_basket = driver.findElement(By.cssSelector("[routerlink*='cart']"));
