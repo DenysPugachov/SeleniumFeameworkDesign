@@ -1,5 +1,6 @@
 package com.den;
 
+import com.den.pageobjects.LandingPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -24,9 +25,11 @@ public class StandAloneTest {
 
         try {
             // fill login form
-            driver.findElement(By.id("userEmail")).sendKeys("dentest@gmail.com");
-            driver.findElement(By.id("userPassword")).sendKeys("testPassword1!");
-            driver.findElement(By.id("login")).click();
+            LandingPage landingPage = new LandingPage(driver);
+
+//            .sendKeys("dentest@gmail.com");
+//           .sendKeys("testPassword1!");
+//            .click();
 
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
 
