@@ -1,7 +1,5 @@
 package com.den;
 
-import com.den.pageobjects.LandingPage;
-import com.den.pageobjects.ProductCatalogue;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -14,7 +12,7 @@ import org.testng.Assert;
 import java.time.Duration;
 import java.util.List;
 
-public class StandAloneTest {
+public class OldStandAloneTest {
     public static void main(String[] args) throws InterruptedException {
 
         ChromeOptions options = new ChromeOptions();
@@ -22,12 +20,13 @@ public class StandAloneTest {
         WebDriver driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        driver.get("https://rahulshettyacademy.com/client");
 
         try {
             // fill login form
-            LandingPage landingPage = new LandingPage(driver);
-            landingPage.goTo();
-            landingPage.loginApplication("dentest@gmail.com", "testPassword1!");
+            driver.findElement(By.id("userEmail")).sendKeys("dentest@gmail.com");
+            driver.findElement(By.id("userPassword")).sendKeys("testPassword1!");
+            driver.findElement(By.id("login")).click();
 
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
 
@@ -89,5 +88,3 @@ public class StandAloneTest {
         }
     }
 }
-
-
