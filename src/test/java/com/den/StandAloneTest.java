@@ -21,21 +21,17 @@ public class StandAloneTest {
         WebDriver driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        driver.get("https://rahulshettyacademy.com/client");
 
         try {
             // fill login form
             LandingPage landingPage = new LandingPage(driver);
-
-//            .sendKeys("dentest@gmail.com");
-//           .sendKeys("testPassword1!");
-//            .click();
+            landingPage.goTo();
+            landingPage.loginApplication("dentest@gmail.com", "testPassword1!");
 
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
 
             // get all product cards
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".mb-3")));
-            List<WebElement> productCardsList = driver.findElements(By.className("mb-3"));
 
             // find specific card
             String testProductName = "ADIDAS ORIGINAL";
@@ -69,8 +65,7 @@ public class StandAloneTest {
             checkoutBnt.click();
 
             // Select Poland from dropdown
-            WebElement dropdownSelectCountry =
-                    driver.findElement(By.cssSelector("input[placeholder='Select Country']"));
+            WebElement dropdownSelectCountry = driver.findElement(By.cssSelector("input[placeholder='Select Country']"));
             dropdownSelectCountry.sendKeys("Poland");
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".ta-results")));
             driver.findElement(By.xpath("//button[contains(@class, 'ta-item')][1]")).click();
@@ -80,8 +75,7 @@ public class StandAloneTest {
 
             // Verify final page
             String confirmTitleText = driver.findElement(By.cssSelector(".hero-primary")).getText();
-            Assert.assertTrue(confirmTitleText.equalsIgnoreCase("Thankyou for the order."),
-                    "Test is fail confirmTitleText is: " + confirmTitleText );
+            Assert.assertTrue(confirmTitleText.equalsIgnoreCase("Thankyou for the order."), "Test is fail confirmTitleText is: " + confirmTitleText);
 
 
         } catch (Exception e) {
