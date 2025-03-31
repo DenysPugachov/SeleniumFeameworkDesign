@@ -29,29 +29,11 @@ public class StandAloneTest {
             landingPage.goTo();
             landingPage.loginApplication("dentest@gmail.com", "testPassword1!");
 
-
-
-            // get all product cards
+            // add product to cart
             ProductCatalogue productCatalogue = new ProductCatalogue(driver);
-            List<WebElement> productCardsList = productCatalogue.getProducts();
-
-            // find specific card
             String testProductName = "ADIDAS ORIGINAL";
-            WebElement product = productCardsList.stream().filter(prod -> prod.findElement(By.tagName("b")).getText().equals(testProductName)).findFirst().orElse(null);
+            productCatalogue.addProductToCart(testProductName);
 
-            // click "Add to card"
-            assert product != null;
-            product.findElement(By.cssSelector(".card-body button:last-of-type")).click();
-
-            // confirm that product is added to the Basket
-
-            // wait until loading icon will be invisible
-            WebElement loadSpinner = driver.findElement(By.cssSelector(".ng-animating"));
-            wait.until(ExpectedConditions.invisibilityOf(loadSpinner));
-
-            // wait until toast element is shown in screen => "Product added to cart"
-            WebElement toastAddToCart = driver.findElement(By.cssSelector("#toast-container"));
-            wait.until(ExpectedConditions.visibilityOf(toastAddToCart));
 
             // click to Cart (basket) button
             WebElement card_basket = driver.findElement(By.cssSelector("[routerlink*='cart']"));
@@ -69,7 +51,7 @@ public class StandAloneTest {
             // Select Poland from dropdown
             WebElement dropdownSelectCountry = driver.findElement(By.cssSelector("input[placeholder='Select Country']"));
             dropdownSelectCountry.sendKeys("Poland");
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".ta-results")));
+//            wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".ta-results")));
             driver.findElement(By.xpath("//button[contains(@class, 'ta-item')][1]")).click();
 
             // click btn "Place order"

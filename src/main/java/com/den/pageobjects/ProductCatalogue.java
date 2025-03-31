@@ -20,14 +20,27 @@ public class ProductCatalogue extends AbstractComponent {
         PageFactory.initElements(driver, this);
     }
 
-    @FindBy(css = "mb-3")
+    @FindBy(css = ".mb-3")
     List<WebElement> productCardList;
 
-    By productBy = By.cssSelector("mb-3");
+    By productBy = By.cssSelector(".mb-3");
+    By addToCart = By.cssSelector(".card-body button:last-of-type");
+    By toastBy = By.cssSelector("#toast-container");
+    By loadSpinnerBy = By.cssSelector(".ng-animating");
 
-    public List<WebElement> getProducts(){
+    public List<WebElement> getProducts() {
         waitForElementToAppear(productBy);
         return productCardList;
     }
 
+    public WebElement getProductByName(String productName) {
+        return getProducts().stream().filter(prod -> prod.findElement(By.tagName("b")).getText().equals(productName)).findFirst().orElse(null);
+    }
+
+    public void addProductToCart(String productName) {
+        WebElement product = getProductByName(productName);
+        waitForElementToAppear(toastBy);
+        product.findElement(addToCart).click();
+        waitForElementToDisappear(loadSpinnerBy);
+    }
 }
