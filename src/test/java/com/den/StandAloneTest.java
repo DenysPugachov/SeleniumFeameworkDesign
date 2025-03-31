@@ -29,11 +29,11 @@ public class StandAloneTest {
             landingPage.goTo();
             landingPage.loginApplication("dentest@gmail.com", "testPassword1!");
 
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
+
 
             // get all product cards
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".mb-3")));
-            List<WebElement> productCardsList = driver.findElements(By.className("mb-3"));
+            ProductCatalogue productCatalogue = new ProductCatalogue(driver);
+            List<WebElement> productCardsList = productCatalogue.getProducts();
 
             // find specific card
             String testProductName = "ADIDAS ORIGINAL";
