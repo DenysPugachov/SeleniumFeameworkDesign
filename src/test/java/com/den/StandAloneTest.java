@@ -1,9 +1,6 @@
 package com.den;
 
-import com.den.pageobjects.CartPage;
-import com.den.pageobjects.LandingPage;
-import com.den.pageobjects.PaymentPage;
-import com.den.pageobjects.ProductCatalogue;
+import com.den.pageobjects.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -50,11 +47,12 @@ public class StandAloneTest {
             paymentPage.selectCountry("Poland");
 
             // click btn "Place order"
-            driver.findElement(By.cssSelector(".action__submit")).click();
+           paymentPage.clickPlaceOderBtn();
 
             // Verify final page
-            String confirmTitleText = driver.findElement(By.cssSelector(".hero-primary")).getText();
-            Assert.assertTrue(confirmTitleText.equalsIgnoreCase("Thankyou for the order."), "Test is fail confirmTitleText is: " + confirmTitleText);
+            FinalPage finalPage = new FinalPage(driver);
+            String textFromFinalPage = finalPage.getTitle();
+            Assert.assertTrue(textFromFinalPage.equalsIgnoreCase("Thankyou for the order."), "Test is fail confirmTitleText is: " + textFromFinalPage);
 
 
         } catch (Exception e) {

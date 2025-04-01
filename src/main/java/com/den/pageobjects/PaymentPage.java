@@ -20,10 +20,18 @@ public class PaymentPage {
     @FindBy(css="input[placeholder='Select Country']")
     WebElement dropdownSelectCountry;
 
+    @FindBy(css=".action__submit")
+    WebElement placeOrderBtn;
+
     By firstInListBy = By.xpath("//button[contains(@class, 'ta-item')][1]");
 
     public void selectCountry(String county) {
         dropdownSelectCountry.sendKeys(county);
         driver.findElement(firstInListBy).click();
+    }
+
+
+    public void clickPlaceOderBtn() {
+        placeOrderBtn.click();
     }
 }
