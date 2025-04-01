@@ -2,6 +2,7 @@ package com.den;
 
 import com.den.pageobjects.CartPage;
 import com.den.pageobjects.LandingPage;
+import com.den.pageobjects.PaymentPage;
 import com.den.pageobjects.ProductCatalogue;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -17,7 +18,7 @@ public class StandAloneTest {
 
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--headless");
-        WebDriver driver = new ChromeDriver(options);
+        WebDriver driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
@@ -45,10 +46,8 @@ public class StandAloneTest {
             cartPage.clickToCheckout();
 
             // Select Poland from dropdown
-            WebElement dropdownSelectCountry = driver.findElement(By.cssSelector("input[placeholder='Select Country']"));
-            dropdownSelectCountry.sendKeys("Poland");
-//            wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".ta-results")));
-            driver.findElement(By.xpath("//button[contains(@class, 'ta-item')][1]")).click();
+            PaymentPage paymentPage = new PaymentPage(driver);
+            paymentPage.selectCountry("Poland");
 
             // click btn "Place order"
             driver.findElement(By.cssSelector(".action__submit")).click();
