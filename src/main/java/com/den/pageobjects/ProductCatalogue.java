@@ -27,6 +27,8 @@ public class ProductCatalogue extends AbstractComponent {
     By addToCart = By.cssSelector(".card-body button:last-of-type");
     By toastBy = By.cssSelector("#toast-container");
     By loadSpinnerBy = By.cssSelector(".ng-animating");
+    By loadSpinner2By = By.cssSelector("ngx-spinner-overlay ");
+    By cartBtn = By.cssSelector("[routerlink*='cart']");
 
     public List<WebElement> getProducts() {
         waitForElementToAppear(productBy);
@@ -39,8 +41,9 @@ public class ProductCatalogue extends AbstractComponent {
 
     public void addProductToCart(String productName) {
         WebElement product = getProductByName(productName);
-        waitForElementToAppear(toastBy);
         product.findElement(addToCart).click();
-        waitForElementToDisappear(loadSpinnerBy);
+        waitForElementToAppear(toastBy);
+        waitForElementToDisappear(loadSpinner2By);
+        waitForElementToAppear(cartBtn);
     }
 }
