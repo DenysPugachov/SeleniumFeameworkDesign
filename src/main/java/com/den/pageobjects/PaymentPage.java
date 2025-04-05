@@ -30,7 +30,8 @@ public class PaymentPage {
         driver.findElement(firstInListBy).click();
     }
 
-    public void clickPlaceOderBtn() {
+    public FinalPage clickPlaceOderBtn() {
         placeOrderBtn.click();
+        return new FinalPage(driver);
     }
 }

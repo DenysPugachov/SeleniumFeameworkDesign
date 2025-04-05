@@ -33,8 +33,9 @@ public class CartPage {
         return productsInCart.stream().anyMatch(cardEl -> cardEl.getText().equalsIgnoreCase(productName));
     }
 
-    public void clickToCheckout(){
-        checkoutBtn.click();
+    public PaymentPage clickToCheckout(){
+       checkoutBtn.click();
+       return new PaymentPage(driver);
     }
 
 }

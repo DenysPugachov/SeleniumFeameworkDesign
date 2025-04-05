@@ -17,20 +17,19 @@ public class StandAloneTest {
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
+
         try {
             // fill login form
             LandingPage landingPage = new LandingPage(driver);
             landingPage.goTo();
-            landingPage.loginApplication("dentest@gmail.com", "testPassword1!");
+            // return object form last method to avoid obj creation in test class (to reduce code).
+            ProductCatalogue productCatalogue =  landingPage.loginApplication("dentest@gmail.com", "testPassword1!");
 
             // add product to cart
-            ProductCatalogue productCatalogue = new ProductCatalogue(driver);
             String testProductName = "ADIDAS ORIGINAL";
-            productCatalogue.addProductToCart(testProductName);
-
+            CartPage cartPage = productCatalogue.addProductToCart(testProductName);
 
             // click to Cart (basket) button
-            CartPage cartPage = new CartPage(driver);
             cartPage.clickToBasket();
 
             // check products in the basket
@@ -38,17 +37,15 @@ public class StandAloneTest {
             Assert.assertTrue(isProdInCard, "There is no product in cart list.");
 
             // click checkout btn (go to payment page)
-            cartPage.clickToCheckout();
+            PaymentPage paymentPage = cartPage.clickToCheckout();
 
             // select Poland from dropdown
-            PaymentPage paymentPage = new PaymentPage(driver);
             paymentPage.selectCountry("Poland");
 
             // click btn "Place order"
-           paymentPage.clickPlaceOderBtn();
+            FinalPage finalPage =  paymentPage.clickPlaceOderBtn();
 
             // Verify final page
-            FinalPage finalPage = new FinalPage(driver);
             String textFromFinalPage = finalPage.getTitle();
             Assert.assertTrue(textFromFinalPage.equalsIgnoreCase("Thankyou for the order."), "Test is fail confirmTitleText is: " + textFromFinalPage);
 
@@ -65,6 +62,5 @@ public class StandAloneTest {
 }
 
 
-//TODO: avoid creating objects in test class.
 
 
