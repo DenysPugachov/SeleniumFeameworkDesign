@@ -1,9 +1,7 @@
 package com.den;
 
 import com.den.pageobjects.*;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
@@ -42,7 +40,7 @@ public class StandAloneTest {
             // click checkout btn (go to payment page)
             cartPage.clickToCheckout();
 
-            // Select Poland from dropdown
+            // select Poland from dropdown
             PaymentPage paymentPage = new PaymentPage(driver);
             paymentPage.selectCountry("Poland");
 
@@ -54,7 +52,8 @@ public class StandAloneTest {
             String textFromFinalPage = finalPage.getTitle();
             Assert.assertTrue(textFromFinalPage.equalsIgnoreCase("Thankyou for the order."), "Test is fail confirmTitleText is: " + textFromFinalPage);
 
-            System.out.println("StandAloneText has passed!");
+            System.out.println("StandAloneTest passed!");
+
         } catch (Exception e) {
             System.err.println("An error occurred: " + e.getMessage());
         } finally {

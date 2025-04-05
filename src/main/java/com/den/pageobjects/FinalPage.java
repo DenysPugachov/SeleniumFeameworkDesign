@@ -1,6 +1,5 @@
 package com.den.pageobjects;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -15,9 +14,9 @@ public class FinalPage {
     }
 
     @FindBy(css=".hero-primary")
-    WebElement confirmTitleText;
+    WebElement confirmTitleTextEl;
 
     public String getTitle() {
-        return confirmTitleText.getText();
+        return confirmTitleTextEl.getText();
     }
 }
