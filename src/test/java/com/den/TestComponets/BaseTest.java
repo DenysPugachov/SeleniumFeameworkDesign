@@ -1,5 +1,6 @@
 package com.den.TestComponets;
 
+import com.den.pageobjects.LandingPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -7,7 +8,6 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.Duration;
 import java.util.Properties;
@@ -16,7 +16,7 @@ public class BaseTest {
 
     public WebDriver driver;
 
-    public void initializeDriver() throws IOException {
+    public WebDriver initializeDriver() throws IOException {
 
         Properties prop = new Properties();
         // convert file to input stream in order to read
@@ -42,6 +42,15 @@ public class BaseTest {
 
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+
+        return driver;
+    }
+
+    public LandingPage launchApplication() throws IOException {
+        driver = initializeDriver();
+        LandingPage landingPage  = new LandingPage(driver);
+        landingPage.goTo();
+        return landingPage;
     }
 
 }
