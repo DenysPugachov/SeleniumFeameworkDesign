@@ -54,13 +54,13 @@ public class StandAloneTest {
             String textFromFinalPage = finalPage.getTitle();
             Assert.assertTrue(textFromFinalPage.equalsIgnoreCase("Thankyou for the order."), "Test is fail confirmTitleText is: " + textFromFinalPage);
 
-
+            System.out.println("StandAloneText has passed!");
         } catch (Exception e) {
             System.err.println("An error occurred: " + e.getMessage());
         } finally {
-            Thread.sleep(3000);
+            Thread.sleep(1000);
             driver.quit();
-            System.out.println("Success! Browser closed.");
+            System.out.println("Browser closed.");
         }
     }
 }
