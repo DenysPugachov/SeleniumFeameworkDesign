@@ -65,3 +65,6 @@ public class StandAloneTest {
 }
 
 
+//TODO: avoid creating objects in test class.
+
+
