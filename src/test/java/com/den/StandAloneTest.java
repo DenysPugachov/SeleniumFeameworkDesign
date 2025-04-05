@@ -10,20 +10,12 @@ import java.time.Duration;
 
 public class StandAloneTest {
     public static void main(String[] args) throws InterruptedException {
-
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--headless");
-        WebDriver driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-
-
         try {
             // fill login form
             LandingPage landingPage = new LandingPage(driver);
             landingPage.goTo();
             // return object form last method to avoid obj creation in test class (to reduce code).
-            ProductCatalogue productCatalogue =  landingPage.loginApplication("dentest@gmail.com", "testPassword1!");
+            ProductCatalogue productCatalogue = landingPage.loginApplication("dentest@gmail.com", "testPassword1!");
 
             // add product to cart
             String testProductName = "ADIDAS ORIGINAL";
@@ -43,7 +35,7 @@ public class StandAloneTest {
             paymentPage.selectCountry("Poland");
 
             // click btn "Place order"
-            FinalPage finalPage =  paymentPage.clickPlaceOderBtn();
+            FinalPage finalPage = paymentPage.clickPlaceOderBtn();
 
             // Verify final page
             String textFromFinalPage = finalPage.getTitle();
