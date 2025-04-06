@@ -8,7 +8,7 @@ import org.testng.annotations.Test;
 public class StandAloneTest extends BaseTest {
 
     @Test
-    public void submitTest() throws InterruptedException {
+    public void submitOrderTest() throws InterruptedException {
         try {
             String testProductName = "ADIDAS ORIGINAL";
 
@@ -32,7 +32,7 @@ public class StandAloneTest extends BaseTest {
             String textFromFinalPage = finalPage.getTitle();
             Assert.assertTrue(textFromFinalPage.equalsIgnoreCase("Thankyou for the order."), "Test is fail confirmTitleText is: " + textFromFinalPage);
 
-            System.out.println("StandAloneTest passed!");
+            System.out.println("SubmitOrderTest passed!");
 
         } catch (Exception e) {
             System.err.println("An error occurred: " + e.getMessage());
