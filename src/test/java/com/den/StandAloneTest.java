@@ -28,11 +28,12 @@ public class StandAloneTest extends BaseTest {
 
         } catch (Exception e) {
             System.err.println("An error occurred: " + e.getMessage());
-        } finally {
-            Thread.sleep(1000);
-            driver.quit();
-            System.out.println("Browser closed.");
         }
+//        finally {
+//            Thread.sleep(1000);
+//            driver.quit();
+//            System.out.println("Browser closed.");
+//        }
     }
 }
 

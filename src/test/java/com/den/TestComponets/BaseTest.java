@@ -6,6 +6,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
 import java.io.FileInputStream;
@@ -49,4 +50,12 @@ public class BaseTest {
         landingPage.goTo();
         return landingPage;
     }
+
+    @AfterMethod
+    public void tearDown() throws InterruptedException {
+        Thread.sleep(1000);
+        driver.quit();
+        System.out.println("tearDown() -> Browser closed.");
+    }
+
 }
