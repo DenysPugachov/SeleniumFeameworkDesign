@@ -6,6 +6,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.testng.annotations.BeforeMethod;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -13,18 +14,14 @@ import java.time.Duration;
 import java.util.Properties;
 
 public class BaseTest {
-
     public WebDriver driver;
+    public LandingPage landingPage;
 
     public WebDriver initializeDriver() throws IOException {
-
         Properties prop = new Properties();
         // convert file to input stream in order to read
-        FileInputStream fis = new FileInputStream(System.getProperty("user.dir") + "//src//test//java" +
-                "//com//den//resources//GlobalData.properties");
-
+        FileInputStream fis = new FileInputStream(System.getProperty("user.dir") + "//src//test//java" + "//com//den//resources//GlobalData.properties");
         prop.load(fis);
-
         // read  data from file GlobalData.properties file
         String browserName = prop.getProperty("browser");
 
@@ -42,15 +39,14 @@ public class BaseTest {
 
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-
         return driver;
     }
 
+    @BeforeMethod
     public LandingPage launchApplication() throws IOException {
         driver = initializeDriver();
-        LandingPage landingPage  = new LandingPage(driver);
+        landingPage = new LandingPage(driver);
         landingPage.goTo();
         return landingPage;
     }
-
 }

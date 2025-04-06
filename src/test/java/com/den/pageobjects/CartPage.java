@@ -32,7 +32,7 @@ public class CartPage {
         return productsInCart.stream().anyMatch(cardEl -> cardEl.getText().equalsIgnoreCase(productName));
     }
 
-    public PaymentPage clickToCheckout(){
+    public PaymentPage clickToCheckoutBtn(){
        checkoutBtn.click();
        return new PaymentPage(driver);
     }
