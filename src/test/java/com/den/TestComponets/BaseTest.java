@@ -20,9 +20,8 @@ public class BaseTest {
 
     public WebDriver initializeDriver() throws IOException {
         Properties prop = new Properties();
-        // convert file to input stream in order to read
 
-        //
+        // convert file to input stream in order to read
         FileInputStream fis = new FileInputStream(System.getProperty("user.dir") + "//src//main//java//com//den" +
                 "//resources//GlobalData.properties");
         prop.load(fis);

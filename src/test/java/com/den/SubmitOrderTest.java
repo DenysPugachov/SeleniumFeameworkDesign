@@ -8,13 +8,12 @@ import com.den.pageobjects.ProductCatalogue;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class StandAloneTest extends BaseTest {
+public class SubmitOrderTest extends BaseTest {
 
     @Test
     public void submitOrderTest() throws InterruptedException {
         try {
             String testProductName = "ADIDAS ORIGINAL";
-
             ProductCatalogue productCatalogue = landingPage.loginApplication("dentest@gmail.com", "testPassword1!");
             CartPage cartPage = productCatalogue.addProductToCart(testProductName);
             cartPage.clickToBasket();

@@ -1,4 +1,4 @@
-package AbstractComponents;
+package com.den.AbstractComponents;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
