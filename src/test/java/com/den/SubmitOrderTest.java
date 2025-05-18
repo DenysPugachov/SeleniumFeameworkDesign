@@ -1,7 +1,10 @@
 package com.den;
 
 import com.den.TestComponets.BaseTest;
-import com.den.pageobjects.*;
+import com.den.pageobjects.CartPage;
+import com.den.pageobjects.FinalPage;
+import com.den.pageobjects.PaymentPage;
+import com.den.pageobjects.ProductCatalogue;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -29,11 +32,6 @@ public class StandAloneTest extends BaseTest {
         } catch (Exception e) {
             System.err.println("An error occurred: " + e.getMessage());
         }
-//        finally {
-//            Thread.sleep(1000);
-//            driver.quit();
-//            System.out.println("Browser closed.");
-//        }
     }
 }
 

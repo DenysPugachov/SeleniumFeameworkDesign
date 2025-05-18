@@ -1,6 +1,6 @@
-package com.den.pageobjects;
+package pageobjects;
 
-import com.den.AbstractComponents.AbstractComponent;
+import AbstractComponents.AbstractComponent;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
