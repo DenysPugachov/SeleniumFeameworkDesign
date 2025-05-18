@@ -21,11 +21,15 @@ public class BaseTest {
     public WebDriver initializeDriver() throws IOException {
         Properties prop = new Properties();
         // convert file to input stream in order to read
-        FileInputStream fis = new FileInputStream(System.getProperty("user.dir") + "//src//test//java//com//den//resources//GlobalData.properties");
+
+        //
+        FileInputStream fis = new FileInputStream(System.getProperty("user.dir") + "//src//main//java//com//den" +
+                "//resources//GlobalData.properties");
         prop.load(fis);
         // read  data from file GlobalData.properties file
         String browserName = prop.getProperty("browser");
 
+        //Choose browser
         if (browserName.equalsIgnoreCase("chrome")) {
             ChromeOptions options = new ChromeOptions();
             options.addArguments("--headless");
